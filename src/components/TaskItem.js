@@ -1,3 +1,4 @@
+import Moment from "react-moment";
 import moment from "moment";
 import "moment/locale/pt-br";
 
