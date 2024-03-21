@@ -35,16 +35,3 @@ const TaskItem = ({ task }) => {
 };
 
 export default TaskItem;
-
-// const TaskItem = ({ task }) => {
-//     return (
-//         <>
-//             <h1>
-//                 {task.task} {moment(task.date).format(" - (ddd) DD/MM/YYYY")}
-//             </h1>
-//             <p>{task.isCompleted ? "Completa" : "Não completa"}</p>
-//         </>
-//     );
-// };
-
-// export default TaskItem;
