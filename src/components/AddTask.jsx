@@ -1,16 +1,42 @@
 import { useState } from "react";
+import { CiSquarePlus } from "react-icons/ci";
+import axios from "axios";
+import { useAlert } from "react-alert";
 
 import CustomInput from "./CustomInput";
 import CustomButton from "./CustomButton";
-import { CiSquarePlus } from "react-icons/ci";
 
 import "./AddTask.scss";
 
-const AddTask = () => {
+const AddTask = ({ fetchTasks }) => {
     const [task, setTask] = useState("");
+
+    const alert = useAlert();
 
     const onChange = (e) => {
         setTask(e.target.value);
+    };
+
+    const handleTaskAddition = async () => {
+        try {
+            if (task.length === 0) {
+                return alert.error(
+                    "A tarefa precisa de uma descrição para ser adicionada"
+                );
+            }
+
+            await axios.post("http://localhost:3001/create", {
+                task: task,
+                isCompleted: false,
+                date: Date.now(),
+            });
+
+            await fetchTasks();
+
+            setTask("");
+        } catch (error) {
+            alert.error("Algo deu errado.");
+        }
     };
 
     return (
@@ -20,8 +46,9 @@ const AddTask = () => {
                 value={task}
                 onChange={onChange}
             />
-            <CustomButton>
-                <CiSquarePlus size={30} color="#ffffff" />
+            {}
+            <CustomButton onClick={handleTaskAddition}>
+                <CiSquarePlus size={28} color="#ffffff" />
             </CustomButton>
         </div>
     );
