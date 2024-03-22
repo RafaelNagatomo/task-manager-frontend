@@ -34,6 +34,8 @@ const AddTask = ({ fetchTasks }) => {
             await fetchTasks();
 
             setTask("");
+
+            await alert.success("A tarefa foi adicionada com sucesso!");
         } catch (error) {
             alert.error("Algo deu errado.");
         }
@@ -45,6 +47,7 @@ const AddTask = ({ fetchTasks }) => {
                 label="Adicionar tarefa..."
                 value={task}
                 onChange={onChange}
+                onEnterPress={handleTaskAddition}
             />
             {}
             <CustomButton onClick={handleTaskAddition}>
