@@ -24,6 +24,20 @@ const TaskItem = ({ task, fetchTasks }) => {
         console.log(task._id);
     };
 
+    const handleTaskCompletionChange = async (e) => {
+        try {
+            await axios.post(`http://localhost:3001/update/${task._id}`, {
+                isCompleted: e.target.checked,
+            });
+
+            await fetchTasks();
+
+            alert.success("A tarefa foi modificada com sucesso!");
+        } catch (error) {
+            alert.error("Algodeu errado.");
+        }
+    };
+
     return (
         <div className="task-item-container">
             <div className="task-description">
@@ -35,7 +49,11 @@ const TaskItem = ({ task, fetchTasks }) => {
                     }
                 >
                     {task.task}
-                    <input type="checkbox" defaultChecked={task.isCompleted} />
+                    <input
+                        type="checkbox"
+                        defaultChecked={task.isCompleted}
+                        onChange={(e) => handleTaskCompletionChange(e)}
+                    />
                     <span
                         className={
                             task.isCompleted
