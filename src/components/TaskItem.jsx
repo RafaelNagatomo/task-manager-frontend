@@ -1,51 +1,51 @@
 // import Moment from "react-moment";
 // import moment from "moment";
-import axios from "axios";
-import { useAlert } from "react-alert";
+import axios from 'axios'
+import { useAlert } from 'react-alert'
 
-import { RiDeleteBin7Fill } from "react-icons/ri";
+import { RiDeleteBin7Fill } from 'react-icons/ri'
 
-import "moment/locale/pt-br";
-import "./TaskItem.scss";
+import 'moment/locale/pt-br'
+import './TaskItem.scss'
 
 const TaskItem = ({ task, fetchTasks }) => {
-    const alert = useAlert();
+  const alert = useAlert()
 
-    const handleTaskDeletion = async () => {
-        try {
-            await axios.get(`http://localhost:3001/delete/${task._id}`);
+  const handleTaskDeletion = async () => {
+    try {
+      await axios.get(`http://localhost:3001/delete/${task._id}`)
 
-            await fetchTasks();
+      await fetchTasks()
 
-            alert.success("Deletado com sucesso.");
-        } catch (_error) {
-            alert.error("Algo deu errado ao deletar.");
-        }
-        console.log(task._id);
-    };
+      alert.success('Deletado com sucesso.')
+    } catch (_error) {
+      alert.error('Algo deu errado ao deletar.')
+    }
+    console.log(task._id)
+  }
 
-    const handleTaskCompletionChange = async (e) => {
-        try {
-            await axios.post(`http://localhost:3001/update/${task._id}`, {
-                isCompleted: e.target.checked,
-            });
+  const handleTaskCompletionChange = async (e) => {
+    try {
+      await axios.post(`http://localhost:3001/update/${task._id}`, {
+        isCompleted: e.target.checked
+      })
 
-            await fetchTasks();
+      await fetchTasks()
 
-            alert.success("A tarefa foi modificada com sucesso!");
-        } catch (_error) {
-            alert.error("Algodeu errado.");
-        }
-    };
+      alert.success('A tarefa foi modificada com sucesso!')
+    } catch (_error) {
+      alert.error('Algodeu errado.')
+    }
+  }
 
-    return (
+  return (
         <div className="task-item-container">
             <div className="task-description">
                 <label
                     className={
                         task.isCompleted
-                            ? "checkbox-container-completed"
-                            : "checkbox-container"
+                          ? 'checkbox-container-completed'
+                          : 'checkbox-container'
                     }
                 >
                     {task.task}
@@ -57,8 +57,8 @@ const TaskItem = ({ task, fetchTasks }) => {
                     <span
                         className={
                             task.isCompleted
-                                ? "checkmark completed"
-                                : "checkmark"
+                              ? 'checkmark completed'
+                              : 'checkmark'
                         }
                     ></span>
                 </label>
@@ -72,7 +72,7 @@ const TaskItem = ({ task, fetchTasks }) => {
                 />
             </div>
         </div>
-    );
-};
+  )
+}
 
-export default TaskItem;
+export default TaskItem
