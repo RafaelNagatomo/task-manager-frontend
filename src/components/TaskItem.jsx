@@ -13,7 +13,7 @@ const TaskItem = ({ task, fetchTasks }) => {
 
   const handleTaskDeletion = async () => {
     try {
-      await axios.get(`http://localhost:3001/delete/${task._id}`)
+      await axios.get(`${process.env.REACT_APP_API_URL}delete/${task._id}`)
 
       await fetchTasks()
 
@@ -26,7 +26,7 @@ const TaskItem = ({ task, fetchTasks }) => {
 
   const handleTaskCompletionChange = async (e) => {
     try {
-      await axios.post(`http://localhost:3001/update/${task._id}`, {
+      await axios.post(`${process.env.REACT_APP_API_URL}update/${task._id}`, {
         isCompleted: e.target.checked
       })
 
@@ -39,39 +39,35 @@ const TaskItem = ({ task, fetchTasks }) => {
   }
 
   return (
-        <div className="task-item-container">
-            <div className="task-description">
-                <label
-                    className={
-                        task.isCompleted
-                          ? 'checkbox-container-completed'
-                          : 'checkbox-container'
-                    }
-                >
-                    {task.task}
-                    <input
-                        type="checkbox"
-                        defaultChecked={task.isCompleted}
-                        onChange={(e) => handleTaskCompletionChange(e)}
-                    />
-                    <span
-                        className={
-                            task.isCompleted
-                              ? 'checkmark completed'
-                              : 'checkmark'
-                        }
-                    ></span>
-                </label>
-            </div>
+    <div className='task-item-container'>
+      <div className='task-description'>
+        <label
+          className={
+            task.isCompleted
+              ? 'checkbox-container-completed'
+              : 'checkbox-container'
+          }
+        >
+          {task.task}
+          <input
+            type='checkbox'
+            defaultChecked={task.isCompleted}
+            onChange={(e) => handleTaskCompletionChange(e)}
+          />
+          <span
+            className={task.isCompleted ? 'checkmark completed' : 'checkmark'}
+          ></span>
+        </label>
+      </div>
 
-            <div className="delete">
-                <RiDeleteBin7Fill
-                    size={18}
-                    color="#F97474"
-                    onClick={handleTaskDeletion}
-                />
-            </div>
-        </div>
+      <div className='delete'>
+        <RiDeleteBin7Fill
+          size={18}
+          color='#F97474'
+          onClick={handleTaskDeletion}
+        />
+      </div>
+    </div>
   )
 }
 

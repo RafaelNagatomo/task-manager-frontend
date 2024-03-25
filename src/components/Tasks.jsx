@@ -14,9 +14,7 @@ const Tasks = () => {
 
   const fetchTasks = useCallback(async () => {
     try {
-      const { data } = await axios.get(
-        'https://task-manager-backend-production-765e.up.railway.app'
-      )
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}`)
 
       setTasks(data)
     } catch (_error) {

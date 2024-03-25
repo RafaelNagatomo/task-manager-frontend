@@ -25,7 +25,7 @@ const AddTask = ({ fetchTasks }) => {
         )
       }
 
-      await axios.post('http://localhost:3001/create', {
+      await axios.post(`${process.env.REACT_APP_API_URL}create`, {
         task,
         isCompleted: false,
         date: Date.now()
@@ -42,18 +42,18 @@ const AddTask = ({ fetchTasks }) => {
   }
 
   return (
-        <div className="add-task-container">
-            <CustomInput
-                label="Adicionar tarefa..."
-                value={task}
-                onChange={onChange}
-                onEnterPress={handleTaskAddition}
-            />
-            {}
-            <CustomButton onClick={handleTaskAddition}>
-                <CiSquarePlus size={28} color="#ffffff" />
-            </CustomButton>
-        </div>
+    <div className='add-task-container'>
+      <CustomInput
+        label='Adicionar tarefa...'
+        value={task}
+        onChange={onChange}
+        onEnterPress={handleTaskAddition}
+      />
+      {}
+      <CustomButton onClick={handleTaskAddition}>
+        <CiSquarePlus size={28} color='#ffffff' />
+      </CustomButton>
+    </div>
   )
 }
 
