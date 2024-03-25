@@ -14,7 +14,9 @@ const Tasks = () => {
 
   const fetchTasks = useCallback(async () => {
     try {
-      const { data } = await axios.get('http://localhost:3001')
+      const { data } = await axios.get(
+        'https://task-manager-backend-production-765e.up.railway.app'
+      )
 
       setTasks(data)
     } catch (_error) {
@@ -35,36 +37,36 @@ const Tasks = () => {
   }, [fetchTasks])
 
   return (
-        <div className="tasks-container">
-            <h2>Minhas Tarefas</h2>
+    <div className='tasks-container'>
+      <h2>Minhas Tarefas</h2>
 
-            <div className="last-tasks">
-                <h3>Últimas Tarefas</h3>
-                <AddTask fetchTasks={fetchTasks} />
-                <div className="tasks-list">
-                    {lastTasks.map((lastTask) => (
-                        <TaskItem
-                            key={lastTask._id}
-                            task={lastTask}
-                            fetchTasks={fetchTasks}
-                        />
-                    ))}
-                </div>
-            </div>
-
-            <div className="completed-tasks">
-                <h3>Tarefas Concluídas</h3>
-                <div className="tasks-list">
-                    {completedTask.map((completedTask) => (
-                        <TaskItem
-                            key={completedTask._id}
-                            task={completedTask}
-                            fetchTasks={fetchTasks}
-                        />
-                    ))}
-                </div>
-            </div>
+      <div className='last-tasks'>
+        <h3>Últimas Tarefas</h3>
+        <AddTask fetchTasks={fetchTasks} />
+        <div className='tasks-list'>
+          {lastTasks.map((lastTask) => (
+            <TaskItem
+              key={lastTask._id}
+              task={lastTask}
+              fetchTasks={fetchTasks}
+            />
+          ))}
         </div>
+      </div>
+
+      <div className='completed-tasks'>
+        <h3>Tarefas Concluídas</h3>
+        <div className='tasks-list'>
+          {completedTask.map((completedTask) => (
+            <TaskItem
+              key={completedTask._id}
+              task={completedTask}
+              fetchTasks={fetchTasks}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }
 
